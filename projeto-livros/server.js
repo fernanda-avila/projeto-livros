@@ -20,7 +20,7 @@ app.use(cors({
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Configuração do Multer para uploads
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     const uploadDir = 'uploads';
@@ -37,7 +37,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({
   storage,
-  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB
+  limits: { fileSize: 5 * 1024 * 1024 }, 
   fileFilter: (req, file, cb) => {
     const filetypes = /jpeg|jpg|png|gif/;
     const mimetype = filetypes.test(file.mimetype);
@@ -47,7 +47,7 @@ const upload = multer({
   }
 });
 
-// Middlewares
+
 app.use(cors({
   origin: 'http://localhost:3000',
   methods: ['GET', 'POST', 'DELETE']
@@ -56,7 +56,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// Rotas
+
 app.get('/api/obras', async (req, res) => {
   try {
     const [rows] = await db.query(`
@@ -115,7 +115,7 @@ app.delete('/api/obras/:id', async (req, res) => {
   }
 });
 
-// Inicialização
+
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`);
 });

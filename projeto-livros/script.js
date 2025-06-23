@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-  // Elementos DOM
+  
   const elements = {
     container: document.getElementById('booksContainer'),
     addBtn: document.getElementById('addBookBtn'),
@@ -12,13 +12,13 @@ document.addEventListener('DOMContentLoaded', function() {
     filterGenre: document.getElementById('filter-genre')
   };
 
-  // Estado
+
   let state = {
     books: [],
     genres: new Set()
   };
 
-  // Funções principais
+
   async function fetchBooks() {
     try {
       showLoading();
@@ -73,13 +73,12 @@ document.addEventListener('DOMContentLoaded', function() {
       elements.container.appendChild(bookCard);
     });
 
-    // Eventos para botões de remover
+
     document.querySelectorAll('.btn-danger').forEach(btn => {
       btn.addEventListener('click', () => deleteBook(btn.dataset.id));
     });
   }
 
-  // Funções auxiliares
   function updateGenres() {
     state.genres.clear();
     state.books.forEach(book => book.genero && state.genres.add(book.genero));
@@ -120,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  // Funções de UI
+
   function showLoading() {
     elements.container.innerHTML = `
       <div class="loading">
@@ -163,7 +162,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // Event Listeners
+
   elements.addBtn.addEventListener('click', () => {
     elements.modal.classList.add('show');
     document.body.style.overflow = 'hidden';
@@ -215,6 +214,6 @@ document.addEventListener('DOMContentLoaded', function() {
   elements.filterType.addEventListener('change', filterBooks);
   elements.filterGenre.addEventListener('change', filterBooks);
 
-  // Inicialização
+  
   fetchBooks();
 });
